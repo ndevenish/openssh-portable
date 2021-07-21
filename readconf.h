@@ -176,6 +176,8 @@ typedef struct {
 	char   *known_hosts_command;
 
 	char	*ignored_unknown; /* Pattern list of unknown tokens to ignore */
+
+	char *password;
 }       Options;
 
 #define SSH_CANONICALISE_NO	0
