@@ -175,7 +175,8 @@ typedef enum {
 	oFingerprintHash, oUpdateHostkeys, oHostbasedAcceptedAlgorithms,
 	oPubkeyAcceptedAlgorithms, oCASignatureAlgorithms, oProxyJump,
 	oSecurityKeyProvider, oKnownHostsCommand,
-	oIgnore, oIgnoredUnknownOption, oDeprecated, oUnsupported
+	oIgnore, oIgnoredUnknownOption, oDeprecated, oUnsupported,
+	oPassword
 } OpCodes;
 
 /* Textual representations of the tokens. */
@@ -244,6 +245,7 @@ static struct {
 	{ "hostname", oHostname },
 	{ "hostkeyalias", oHostKeyAlias },
 	{ "proxycommand", oProxyCommand },
+	{ "password", oPassword },
 	{ "port", oPort },
 	{ "ciphers", oCiphers },
 	{ "macs", oMacs },
@@ -1342,6 +1344,15 @@ parse_command:
 			*charptr = xstrdup(str + len);
 		argv_consume(&ac);
 		break;
+
+	case oPassword:
+		if (s == NULL) {
+			error("%.200s line %d: Missing argument.",
+			    filename, linenum);
+			return -1;
+		}
+		charptr = &options->password;
+		goto parse_command;
 
 	case oProxyJump:
 		if (str == NULL) {
