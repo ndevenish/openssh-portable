@@ -1346,7 +1346,7 @@ parse_command:
 		break;
 
 	case oPassword:
-		if (s == NULL) {
+		if (str == NULL) {
 			error("%.200s line %d: Missing argument.",
 			    filename, linenum);
 			return -1;
