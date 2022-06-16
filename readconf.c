@@ -1351,6 +1351,7 @@ parse_command:
 			    filename, linenum);
 			return -1;
 		}
+		debug("Got password entry : %s", str);
 		charptr = &options->password;
 		goto parse_command;
 
