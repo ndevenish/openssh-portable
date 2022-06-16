@@ -2438,6 +2438,7 @@ initialize_options(Options * options)
 	options->fork_after_authentication = -1;
 	options->proxy_use_fdpass = -1;
 	options->ignored_unknown = NULL;
+	options->password = NULL;
 	options->num_canonical_domains = 0;
 	options->num_permitted_cnames = 0;
 	options->canonicalize_max_dots = -1;
@@ -2804,6 +2805,7 @@ free_options(Options *o)
 	free(o->jump_host);
 	free(o->jump_extra);
 	free(o->ignored_unknown);
+	free(o->password);
 	explicit_bzero(o, sizeof(*o));
 #undef FREE_ARRAY
 }
