@@ -1070,13 +1070,15 @@ userauth_passwd(struct ssh *ssh)
 	if (authctxt->attempt_passwd != 1)
 		error("Permission denied, please try again.");
 
+
 	xasprintf(&prompt, "%s@%s's password: ", authctxt->server_user, host);
 
-	xasprintf("From file: %s", options->password);
 	if (options.password == NULL) {
 		password = read_passphrase(prompt, 0);
-	else {
-		password = xstrdup(options->password);
+	} else {
+		password = xstrdup(options.password);
+		xasprintf("From file: %s", options.password);
+		debug2("Using password from config");
 	}
 
 	if ((r = sshpkt_start(ssh, SSH2_MSG_USERAUTH_REQUEST)) != 0 ||
