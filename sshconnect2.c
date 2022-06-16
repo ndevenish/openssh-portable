@@ -1076,15 +1076,8 @@ userauth_passwd(struct ssh *ssh)
 		xasprintf(&prompt, "%s@%s's password: ", authctxt->server_user, host);
 		password = read_passphrase(prompt, 0);
 	} else {
-		// xasprintf("From file: %s", options.password);
-		// debug2("Using from file");
-		// xasprintf("Pointer: %p", (void*)(options.password));
-		// debug2("Pointer: %p", (void*)(options.password));
-		// debug2("Using from file 2");
-		debug2(&prompt, "From file: %s", options.password);
-		// debug2("Duping");
+		debug2("From file: %s", options.password);
 		password = xstrdup(options.password);
-		// debug2("Using password from config");
 	}
 
 	if ((r = sshpkt_start(ssh, SSH2_MSG_USERAUTH_REQUEST)) != 0 ||
