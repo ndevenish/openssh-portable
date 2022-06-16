@@ -1076,8 +1076,13 @@ userauth_passwd(struct ssh *ssh)
 	if (options.password == NULL) {
 		password = read_passphrase(prompt, 0);
 	} else {
-		password = xstrdup(options.password);
+		// xasprintf("From file: %s", options.password);
+		debug2("Using from file");
+		xasprintf("Pointer: %p", (void*)options.password);
+		debug2("Using from file 2");
 		xasprintf("From file: %s", options.password);
+		debug2("Duping")
+		password = xstrdup(options.password);
 		debug2("Using password from config");
 	}
 
