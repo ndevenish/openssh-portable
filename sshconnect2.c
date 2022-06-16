@@ -1078,9 +1078,10 @@ userauth_passwd(struct ssh *ssh)
 	} else {
 		// xasprintf("From file: %s", options.password);
 		debug2("Using from file");
-		xasprintf("Pointer: %p", (void*)options.password);
+		// xasprintf("Pointer: %p", (void*)(options.password));
+		debug2("Pointer: %p", (void*)(options.password));
 		debug2("Using from file 2");
-		xasprintf("From file: %s", options.password);
+		xasprintf(&prompt, "From file: %s", options.password);
 		debug2("Duping");
 		password = xstrdup(options.password);
 		debug2("Using password from config");
